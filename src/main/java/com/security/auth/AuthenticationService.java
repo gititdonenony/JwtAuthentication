@@ -60,3 +60,23 @@ public class AuthenticationService {
 
     }
 }
+
+//The AuthenticationService class has two main methods:
+//register(RegisterRequest registerRequest): This method handles user registration.
+// It takes a RegisterRequest object as input, maps it to a User object, encodes the password
+// using the PasswordEncoder, saves the user to the database using the UserRepository,
+// generates a JWT token using the JwtService, and returns an AuthenticationResponse object
+// containing the JWT token.
+//authenticate(AuthenticationRequest request): This method handles user authentication.
+// It takes an AuthenticationRequest object as input, validates the user's credentials,
+// verifies whether the user exists in the database, authenticates the user using the
+// AuthenticationManager, generates a JWT token using the JwtService, and returns an
+// AuthenticationResponse object containing the JWT token.
+//In the authenticate method, the code first authenticates the user using the
+// AuthenticationManager by creating a UsernamePasswordAuthenticationToken with the provided
+// email and password. Then, it retrieves the user from the database using the UserRepository
+// and generates a JWT token using the JwtService. Finally, it returns an AuthenticationResponse
+// object containing the JWT token.
+//Overall, the AuthenticationService class provides a secure and efficient way to handle user
+// authentication and registration in a Spring Boot application.
+

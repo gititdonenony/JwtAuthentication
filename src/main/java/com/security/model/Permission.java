@@ -22,4 +22,3 @@ public enum Permission {
         this.permission = permission;
     }
 }
-}
