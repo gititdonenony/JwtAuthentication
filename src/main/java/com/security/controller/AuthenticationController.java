@@ -1,6 +1,9 @@
-package com.security.auth;
+package com.security.controller;
 
-import lombok.RequiredArgsConstructor;
+import com.security.auth.AuthenticationRequest;
+import com.security.auth.AuthenticationResponse;
+import com.security.service.AuthenticationService;
+import com.security.model.RegisterRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +23,7 @@ public class AuthenticationController {
 
     //Mapping from RegisterRequest to User
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest registerRequest
-    ) {
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest registerRequest) {
         // Call the register method of the authenticationService
         AuthenticationResponse authResponse = authenticationService.register(registerRequest);
         // Return the response
@@ -31,9 +32,7 @@ public class AuthenticationController {
 
     // Mapping from AuthenticationRequest to AuthenticationResponse
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
-    ) {
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
         // Call the authenticate method of the authenticationService
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }

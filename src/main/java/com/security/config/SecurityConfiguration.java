@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static com.security.model.Permission.*;
 import static com.security.model.Role.ADMIN;
-import static com.security.model.Role.USER;
+//import static com.security.model.Role.USER;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
@@ -35,9 +35,9 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/api/auth/*")
+                        req.requestMatchers("/api/auth/register", "/api/auth/authenticate")
                                 .permitAll()
-                                .requestMatchers("/api/auth/user").hasAnyRole(ADMIN.name(), USER.name())
+                                //.requestMatchers("/api/auth/user").hasAnyRole(ADMIN.name(), USER.name())
                                 .requestMatchers(GET, "/api/auth/user").hasAnyAuthority(ADMIN_READ.name(), USER_READ.name())
                                 .requestMatchers(POST, "/api/auth/user").hasAnyAuthority(ADMIN_CREATE.name(), USER_CREATE.name())
                                 .anyRequest()
