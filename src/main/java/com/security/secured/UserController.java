@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/crackit/v1/management")
-public class MemberController {
+@RequestMapping("/api/auth/user")
+public class UserController {
     @GetMapping
-    public String getMember() {
-        return "Secured Endpoint :: GET - Member controller";
+    public String getUser() {
+        return "Secured Endpoint :: GET - User controller";
     }
 
     @PostMapping
     public String post() {
-        return "POST:: management controller";
+        return "POST:: Admin controller";
     }
 }

@@ -17,6 +17,7 @@ import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -36,9 +37,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers("/api/auth/*")
                                 .permitAll()
-                                .requestMatchers("/crackit/v1/management/**").hasAnyRole(ADMIN.name(), USER.name())
-                                .requestMatchers(GET, "/crackit/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), USER_READ.name())
-                                .requestMatchers(POST, "/crackit/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), USER_CREATE.name())
+                                .requestMatchers("/api/auth/user").hasAnyRole(ADMIN.name(), USER.name())
+                                .requestMatchers(GET, "/api/auth/user").hasAnyAuthority(ADMIN_READ.name(), USER_READ.name())
+                                .requestMatchers(POST, "/api/auth/user").hasAnyAuthority(ADMIN_CREATE.name(), USER_CREATE.name())
                                 .anyRequest()
                                 .authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))

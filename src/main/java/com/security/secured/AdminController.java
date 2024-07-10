@@ -13,7 +13,7 @@ public class AdminController {
     @GetMapping
     @PreAuthorize("hasAuthority('admin:read')")
     public String getAdmin() {
-        return "Secured Endpoint :: GET - Admin controller";
+        return "Secured Endpoint -> Admin";
     }
 
     @PostMapping
