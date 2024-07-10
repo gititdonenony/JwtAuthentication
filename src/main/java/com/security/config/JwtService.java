@@ -41,7 +41,7 @@ public class JwtService {
         for (GrantedAuthority authority : authorities) {
             authoritiesSet.add(authority.getAuthority());
         }
-        //MEMBER, ADMIN
+        //USER, ADMIN
         return String.join(",", authoritiesSet);
     }
 

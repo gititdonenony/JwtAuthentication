@@ -15,6 +15,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
+    // Constructor injection
     public AuthenticationService(UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
@@ -28,25 +29,24 @@ public class AuthenticationService {
                 .firstName(registerRequest.getFirstName())
                 .lastName(registerRequest.getLastName())
                 .email(registerRequest.getEmail())
+                // We need to encode the password before saving it to the database
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(registerRequest.getRole())
                 .build();
+        // Save the user to the database
         var savedUser = userRepository.save(user);
+        // Generate the JWT token
         String jwtToken = jwtService.generateToken(user);
+        // Return the JWT token to the client
         return AuthenticationResponse.builder().accessToken(jwtToken).build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        //FirstStep
-        //We need to validate our request (validate whether password & username is correct)
-        //Verify whether user present in the database
-        //Which AuthenticationProvider -> DaoAuthenticationProvider (Inject)
-        //We need to authenticate using authenticationManager injecting this authenticationProvider
-        //SecondStep
-        //Verify whether userName and password is correct => UserNamePasswordAuthenticationToken
-        //Verify whether user present in db
-        //generateToken
-        //Return the token
+        // First step: Authenticate the user using authenticationManager
+        // Second step: Authenticate the user's credentials using the provided email and password
+        // Third step: Retrieve the user from the database using the UserRepository
+        // Fourth step: Generate a JWT token using the JwtService
+        // Fifth step: Return the JWT token to the client
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -60,23 +60,3 @@ public class AuthenticationService {
 
     }
 }
-
-//The AuthenticationService class has two main methods:
-//register(RegisterRequest registerRequest): This method handles user registration.
-// It takes a RegisterRequest object as input, maps it to a User object, encodes the password
-// using the PasswordEncoder, saves the user to the database using the UserRepository,
-// generates a JWT token using the JwtService, and returns an AuthenticationResponse object
-// containing the JWT token.
-//authenticate(AuthenticationRequest request): This method handles user authentication.
-// It takes an AuthenticationRequest object as input, validates the user's credentials,
-// verifies whether the user exists in the database, authenticates the user using the
-// AuthenticationManager, generates a JWT token using the JwtService, and returns an
-// AuthenticationResponse object containing the JWT token.
-//In the authenticate method, the code first authenticates the user using the
-// AuthenticationManager by creating a UsernamePasswordAuthenticationToken with the provided
-// email and password. Then, it retrieves the user from the database using the UserRepository
-// and generates a JWT token using the JwtService. Finally, it returns an AuthenticationResponse
-// object containing the JWT token.
-//Overall, the AuthenticationService class provides a secure and efficient way to handle user
-// authentication and registration in a Spring Boot application.
-

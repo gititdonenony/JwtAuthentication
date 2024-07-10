@@ -9,8 +9,8 @@ public enum Permission {
     ADMIN_CREATE("admin:create"), // Permission to create new admin data
 
     // Member-related permissions
-    MEMBER_READ("management:read"), // Permission to read member data
-    MEMBER_CREATE("management:create"), // Permission to create new member data
+    USER_READ("management:read"), // Permission to read member data
+    USER_CREATE("management:create"), // Permission to create new member data
 
     ; // Required to separate enum constants
 
@@ -19,6 +19,7 @@ public enum Permission {
 
     // Constructor to initialize the permission string
     Permission(String permission) {
+
         this.permission = permission;
     }
 }
